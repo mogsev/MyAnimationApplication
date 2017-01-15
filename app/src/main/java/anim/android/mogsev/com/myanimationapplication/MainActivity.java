@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 //mImageView.setTranslationY(500);
                 //mImageView.animate().translationY(700).setDuration(300).start();
                 //mImageView.getViewTreeObserver().addOnPreDrawListener(new MainViewTreeObserver(mImageView));
-                someView.getViewTreeObserver().addOnPreDrawListener(new SomeViewTreeObserver(getBaseContext(), someView));
+                //someView.getViewTreeObserver().addOnPreDrawListener(new SomeViewTreeObserver(getBaseContext(), someView));
+                someView.setVisibility(someView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
         });
     }
