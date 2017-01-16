@@ -1,7 +1,9 @@
 package anim.android.mogsev.com.myanimationapplication;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mButton;
     private ImageView mImageView;
     private View someView;
+    private Button btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mImageView = (ImageView) findViewById(R.id.ivMain);
         mButton = (Button) findViewById(R.id.btnMain);
         someView = (View) findViewById(R.id.llSomeView);
+        btn2 = (Button) findViewById(R.id.btn2);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +47,28 @@ public class MainActivity extends AppCompatActivity {
                 //someView.getViewTreeObserver().addOnPreDrawListener(new SomeViewTreeObserver(getBaseContext(), someView));
                 someView.setVisibility(someView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(v,
+                        PropertyValuesHolder.ofFloat("scaleX", 0.0f),
+                        PropertyValuesHolder.ofFloat("scaleY", 0.0f));
+                scaleDown.setDuration(600);
+                scaleDown.start();
+/**
+                btn2.animate().scaleX(0.0f).scaleYBy(0.0f).setDuration(300).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        btn2.setVisibility(View.GONE);
+                    }
+                });
+ */
+            }
+
         });
     }
 
