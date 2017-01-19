@@ -6,7 +6,9 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mImageView;
     private View someView;
     private Button btn2;
+    private Button btnTimeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
         mButton = (Button) findViewById(R.id.btnMain);
         someView = (View) findViewById(R.id.llSomeView);
         btn2 = (Button) findViewById(R.id.btn2);
+
+        final TextView tvCard = (TextView) findViewById(R.id.tvCard);
+        Button btnCard = (Button) findViewById(R.id.btnCardOk);
+
+        btnCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvCard.setVisibility((tvCard.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE);
+            }
+        });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +84,52 @@ public class MainActivity extends AppCompatActivity {
  */
             }
 
+        });
+
+        // create time dialog
+        btnTimeDialog = (Button) findViewById(R.id.btnTimeDialog);
+        btnTimeDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "obClick btnTimeDialog");
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Time dialog");
+                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
+                View viewDialog = layoutInflater.inflate(R.layout.item_full_time_dialog, viewGroup, false);
+                NumberPicker npDay = (NumberPicker) viewDialog.findViewById(R.id.npDay);
+                npDay.setMinValue(0);
+                npDay.setMaxValue(31);
+                NumberPicker npMonth = (NumberPicker) viewDialog.findViewById(R.id.npMonth);
+                npMonth.setMinValue(0);
+                npMonth.setMaxValue(12);
+                NumberPicker npYear = (NumberPicker) viewDialog.findViewById(R.id.npYear);
+                npYear.setMinValue(1901);
+                npYear.setMaxValue(2017);
+                builder.setView(viewDialog);
+                builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        Button btn = alert.getButton(AlertDialog.BUTTON_POSITIVE);
+                        btn.setPadding(160, 0, 160, 0);
+                    }
+                });
+
+                alert.show();
+            }
         });
     }
 
