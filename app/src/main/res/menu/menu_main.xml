@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemMenu"
+        android:title="Main menu"
+        android:icon="@drawable/ic_menu_white_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+            <group>
+
+                <item
+                    android:id="@+id/menuSettings"
+                    android:menuCategory="system"
+                    android:orderInCategory="100"
+                    android:title="Settings"
+                    app:showAsAction="never" />
+
+                <!-- Menu logout-->
+                <item
+                    android:id="@+id/menuLogin"
+                    android:menuCategory="system"
+                    android:orderInCategory="100"
+                    android:title="Login"
+                    app:showAsAction="never" />
+            </group>
+
+        </menu>
+
+    </item>
+</menu>
+

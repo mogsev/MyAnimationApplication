@@ -1,12 +1,12 @@
 package anim.android.mogsev.com.myanimationapplication;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -31,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private View someView;
     private Button btn2;
     private Button btnTimeDialog;
+    private Button btnFragmentMenu;
+    private Button btnRx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView tvCard = (TextView) findViewById(R.id.tvCard);
         Button btnCard = (Button) findViewById(R.id.btnCardOk);
+
+        Button btnRx = (Button) findViewById(R.id.btnRx);
+        btnRx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BasicActivity.class));
+            }
+        });
 
         btnCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +139,22 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+
+        btnFragmentMenu = (Button) findViewById(R.id.btnFragmentMenu);
+        btnFragmentMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(android.R.id.content, new MenuFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
+
+
+
 
     private static class MainViewTreeObserver implements ViewTreeObserver.OnPreDrawListener {
         private static final String TAG = MainViewTreeObserver.class.getSimpleName();
