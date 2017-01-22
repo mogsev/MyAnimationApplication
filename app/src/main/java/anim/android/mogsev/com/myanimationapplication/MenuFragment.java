@@ -1,5 +1,7 @@
 package anim.android.mogsev.com.myanimationapplication;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 /**
@@ -36,6 +39,7 @@ public class MenuFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
