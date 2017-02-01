@@ -173,7 +173,9 @@
             <ImageView
                 android:id="@+id/ivImageSlider"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:transitionName="image_slider"
+                android:src="@drawable/ic_circle_red_20dp"/>
 
         </LinearLayout>
 
