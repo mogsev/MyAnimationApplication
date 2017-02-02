@@ -6,12 +6,14 @@
     android:fitsSystemWindows="false">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="true" />
@@ -24,10 +26,10 @@
         android:fitsSystemWindows="true">
 
         <android.support.v4.view.ViewPager
-            android:transitionName="image_slider"
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:transitionName="image_slider" />
 
     </FrameLayout>
 

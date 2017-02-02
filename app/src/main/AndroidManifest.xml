@@ -26,7 +26,7 @@
         <activity
             android:name=".activity.ImageSliderActivity"
             android:label="@string/app_empty_string"
-            android:theme="@style/AppTheme.ActionBar.Transparent" />
+            android:theme="@style/AppTheme.ImageSlider.ActionBar.Transparent" />
 
     </application>
 

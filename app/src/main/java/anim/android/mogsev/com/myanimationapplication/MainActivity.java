@@ -15,10 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.ChangeImageTransform;
-import android.transition.Slide;
 import android.transition.TransitionSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,15 +62,16 @@ public class MainActivity extends AppCompatActivity {
                 list.add("http://www.tombcare.com:8000/media/cache/fe/7a/fe7a3d63541833319056c9e55a022a91.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/b7/e5/b7e5a69743149c3ad57d2f1b7e8dc4ef.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/da/c0/dac0a2692ec51e822a2afc14bf39eec3.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/60/45/6045379bad44368fc40d0dbfa64669a1.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/a4/e6/a4e6f36f5411ab473926ec0f4047fb73.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/02/02/02023cd08b48a082d7532a62fa73dca0.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/a2/5d/a25d626bcdd9a1595f7458c91397d69e.jpg");
                 intent.putStringArrayListExtra(ImageSliderActivity.DATA_LIST_STRING, list);
                 startActivity(intent);
             }
         });
         ivImageSlider = (ImageView) findViewById(R.id.ivImageSlider);
+        Picasso.with(getApplicationContext())
+                .load("http://www.tombcare.com:8000/media/cache/63/d3/63d3f490ccba929d2961e54ffec0c078.jpg")
+                .resize(600, 400)
+                .centerInside()
+                .into(ivImageSlider);
         ivImageSlider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,45 +80,30 @@ public class MainActivity extends AppCompatActivity {
                 list.add("http://www.tombcare.com:8000/media/cache/63/d3/63d3f490ccba929d2961e54ffec0c078.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/3e/05/3e05ca6b85779ebd9b46153253409e29.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/fe/7a/fe7a3d63541833319056c9e55a022a91.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/b7/e5/b7e5a69743149c3ad57d2f1b7e8dc4ef.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/da/c0/dac0a2692ec51e822a2afc14bf39eec3.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/60/45/6045379bad44368fc40d0dbfa64669a1.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/a4/e6/a4e6f36f5411ab473926ec0f4047fb73.jpg");
-                list.add("http://www.tombcare.com:8000/media/cache/02/02/02023cd08b48a082d7532a62fa73dca0.jpg");
                 list.add("http://www.tombcare.com:8000/media/cache/a2/5d/a25d626bcdd9a1595f7458c91397d69e.jpg");
                 intent.putStringArrayListExtra(ImageSliderActivity.DATA_LIST_STRING, list);
+                intent.putExtra(ImageSliderActivity.DATA_POSITION, 2);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // Re-enter transition is executed when returning to this activity
-                    Slide slideTransition = new Slide();
-                    slideTransition.setSlideEdge(Gravity.LEFT);
-                    slideTransition.setDuration(600);
-                    getWindow().setReenterTransition(slideTransition);
-                    getWindow().setExitTransition(slideTransition);
-
                     TransitionSet transitionSet = new TransitionSet();
                     ChangeBounds changeBoundsTransition = new ChangeBounds();
                     ChangeImageTransform changeImageTransform = new ChangeImageTransform();
                     transitionSet.addTransition(changeImageTransform);
                     transitionSet.addTransition(changeBoundsTransition);
                     transitionSet.setDuration(600);
-
+                    getWindow().setEnterTransition(transitionSet);
+                    getWindow().setReenterTransition(transitionSet);
+                    getWindow().setExitTransition(transitionSet);
                     getWindow().setSharedElementEnterTransition(transitionSet);
                     getWindow().setSharedElementReturnTransition(transitionSet);
-                    final View image = findViewById(R.id.ivImageSlider);
-
-                    getWindow().setEnterTransition(transitionSet);
-
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, image, "image_slider");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, ivImageSlider, ImageSliderActivity.TRANSITION_IMAGE_NAME);
                     startActivity(intent, options.toBundle());
-
-                    //startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                 } else {
                     startActivity(intent);
                 }
-
             }
         });
-
 
         mImageView = (ImageView) findViewById(R.id.ivMain);
         mButton = (Button) findViewById(R.id.btnMain);
@@ -239,11 +223,6 @@ btn2.setVisibility(View.GONE);
     protected void onResume() {
         super.onResume();
         Log.i(TAG, "onResume");
-        Picasso.with(getApplicationContext())
-                .load("http://www.tombcare.com:8000/media/cache/63/d3/63d3f490ccba929d2961e54ffec0c078.jpg")
-                .resize(400, 300)
-                .centerInside()
-                .into(ivImageSlider);
     }
 
     private static class MainViewTreeObserver implements ViewTreeObserver.OnPreDrawListener {

@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Slide;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.MenuItem;
 
 import java.util.List;
 
@@ -19,6 +16,7 @@ public class ImageSliderActivity extends AppCompatActivity {
 
     public static String DATA_LIST_STRING = "data_list_string";
     public static String TRANSITION_IMAGE_NAME = "image_slider";
+    public static String DATA_POSITION = "data_position";
 
     private ViewPager mViewPager;
     private ImageSliderAdapter mAdapter;
@@ -40,7 +38,9 @@ public class ImageSliderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             List<String> list = intent.getStringArrayListExtra(DATA_LIST_STRING);
+            int position = intent.getIntExtra(DATA_POSITION, 0);
             if (list != null && !list.isEmpty()) mAdapter.setList(list);
+            mViewPager.setCurrentItem(position);
         }
     }
 
@@ -48,25 +48,6 @@ public class ImageSliderActivity extends AppCompatActivity {
         Log.i(TAG, "initView");
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
     }
-
-    /**
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //onBackPressed();
-                supportFinishAfterTransition();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-    }
-     */
 
     @Override
     public boolean onSupportNavigateUp() {
