@@ -1,10 +1,13 @@
 package anim.android.mogsev.com.myanimationapplication.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.viewpagerindicator.UnderlinePageIndicator;
 
 import java.util.List;
 
@@ -42,6 +45,11 @@ public class ImageSliderActivity extends AppCompatActivity {
             if (list != null && !list.isEmpty()) mAdapter.setList(list);
             mViewPager.setCurrentItem(position);
         }
+
+        UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mViewPager);
+        indicator.setSelectedColor(Color.GRAY);
+        indicator.setFades(false);
     }
 
     private void initView() {

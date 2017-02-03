@@ -177,6 +177,12 @@
                 android:transitionName="image_slider"
                 android:src="@drawable/ic_circle_red_20dp"/>
 
+            <Button
+                android:id="@+id/btnThingInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thing Info" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

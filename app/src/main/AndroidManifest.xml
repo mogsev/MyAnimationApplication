@@ -3,6 +3,7 @@
     package="anim.android.mogsev.com.myanimationapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +22,14 @@
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.ImageSliderActivity"
             android:label="@string/app_empty_string"
             android:theme="@style/AppTheme.ImageSlider.ActionBar.Transparent" />
-
+        <activity
+            android:name=".activity.ThingInfoActivity"
+            android:label="@string/app_empty_string"
+            android:theme="@style/AppTheme.NoActionBar.CollapsingToolbarLayout" />
     </application>
 
 </manifest>

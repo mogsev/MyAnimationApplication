@@ -59,7 +59,7 @@ public class ImageSliderAdapter extends PagerAdapter {
         Log.i(TAG, "point: " + point.toString());
         Picasso.with(context)
                 .load(list.get(position))
-                .resize(point.x, point.y)
+                .resize(300, 200)
                 .centerInside()
                 .into(imageView);
         frameLayout.addView(imageView);
